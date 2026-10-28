@@ -20,7 +20,7 @@ public class Producto {
     private String nombre;
 
     @Column (name = "id_categoria")
-    private Integer id_categoria;
+    private Integer id_Categoria;
 
 
     private LocalDateTime fecha;
@@ -42,7 +42,7 @@ public class Producto {
     private Categoria categoria;
 
     //Prueba
-    @OneToMany(mappedBy = "prooducto")
+    @OneToMany(mappedBy = "producto")
     private List<CompraProducto> compraProductos;
 
     public Integer getIdProducto() {
@@ -61,12 +61,12 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public Integer getId_categoria() {
-        return id_categoria;
+    public Integer getId_Categoria() {
+        return id_Categoria;
     }
 
-    public void setId_categoria(Integer id_categoria) {
-        this.id_categoria = id_categoria;
+    public void setId_Categoria(Integer id_Categoria) {
+        this.id_Categoria = id_Categoria;
     }
 
     public LocalDateTime getFecha() {
