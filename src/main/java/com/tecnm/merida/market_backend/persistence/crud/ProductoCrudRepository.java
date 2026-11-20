@@ -1,22 +1,17 @@
 package com.tecnm.merida.market_backend.persistence.crud;
 
 import com.tecnm.merida.market_backend.persistence.entity.Producto;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-//Metodos abstractos que despues se implementaran
 public interface ProductoCrudRepository extends CrudRepository<Producto, Integer> {
 
-    /*SQL Query Method
-    SELECT *
-    FROM productos
-    WHERE id_categoria = 10?
-    ORDER BY nombre ASC
-     */
+    // La anotación @Query evita que Spring se confunda con los nombres
+    @Query(value = "SELECT * FROM productos WHERE id_categoria = ?1 ORDER BY nombre ASC", nativeQuery = true)
     List<Producto> findByIdCategoriaOrderByNombreAsc(int idCategoria);
 
-    //Cantidad Stock
     Optional<List<Producto>> findByCantidadStockLessThanAndEstado(int cantidadStock, boolean estado);
 }

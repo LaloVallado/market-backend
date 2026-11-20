@@ -2,11 +2,12 @@ package com.tecnm.merida.market_backend.persistence.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.EmbeddedId;
 
+import java.io.Serializable;
+import java.util.Objects;
 
 @Embeddable
-public class CompraProductoPK {
+public class CompraProductoPK implements Serializable {
 
     @Column(name = "id_compra")
     private Integer idCompra;
@@ -30,4 +31,17 @@ public class CompraProductoPK {
         this.idProducto = idProducto;
     }
 
+    // Una llave compuesta debe poder compararse
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CompraProductoPK that)) return false;
+        return Objects.equals(idCompra, that.idCompra)
+                && Objects.equals(idProducto, that.idProducto);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idCompra, idProducto);
+    }
 }

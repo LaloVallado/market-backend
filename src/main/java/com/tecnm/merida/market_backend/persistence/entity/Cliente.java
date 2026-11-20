@@ -1,32 +1,37 @@
 package com.tecnm.merida.market_backend.persistence.entity;
-import jakarta.persistence.Column;
+
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
-
 @Table(name = "clientes")
 public class Cliente {
 
+    // En la BD la columna id es varchar(20), por eso es String
     @Id
-    private Integer id;
-    private String nombre;
-    private String apellidos;
-    private String celular;
-    private String direccion;
+    private String id;
 
-    @OneToMany(mappedBy = "cliente")
-    private List<Compra> compras;
+    private String nombre;
+
+    private String apellidos;
+
+    // En la BD la columna celular es numeric, por eso es Long
+    private Long celular;
+
+    private String direccion;
 
     @Column(name = "correo_electronico")
     private String correoElectronico;
 
-    public Integer getId() {
+    @OneToMany(mappedBy = "cliente")
+    private List<Compra> compras;
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -46,11 +51,11 @@ public class Cliente {
         this.apellidos = apellidos;
     }
 
-    public String getCelular() {
+    public Long getCelular() {
         return celular;
     }
 
-    public void setCelular(String celular) {
+    public void setCelular(Long celular) {
         this.celular = celular;
     }
 

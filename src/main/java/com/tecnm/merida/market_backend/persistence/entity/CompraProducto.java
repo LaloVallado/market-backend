@@ -2,20 +2,24 @@ package com.tecnm.merida.market_backend.persistence.entity;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
 @Entity
-@Table (name = "compras_productos")
+@Table(name = "compras_productos")
 public class CompraProducto {
-    //Viene de otra clase
+
     @EmbeddedId
     private CompraProductoPK id;
 
     private Integer cantidad;
+
     private Double total;
+
     private Boolean estado;
 
+    // @MapsId: cuando Hibernate guarda la compra en cascada,
+    // copia el id autogenerado de la compra a id.idCompra
+    @MapsId("idCompra")
     @ManyToOne
-    @JoinColumn(name = "id_compra", insertable = false, updatable = false)
+    @JoinColumn(name = "id_compra")
     private Compra compra;
 
     @ManyToOne
@@ -69,5 +73,4 @@ public class CompraProducto {
     public void setProducto(Producto producto) {
         this.producto = producto;
     }
-
 }
