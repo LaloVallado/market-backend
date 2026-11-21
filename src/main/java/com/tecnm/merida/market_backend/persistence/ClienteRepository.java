@@ -35,6 +35,12 @@ public class ClienteRepository implements ClientRepository {
     @Override
     public Client save(Client client) {
         Cliente cliente = mapper.toCliente(client);
+
+        // Si el cliente ya existe (PUT), conservamos su contrasena encriptada
+        // (el dominio Client no maneja contrasena y se borraria)
+        clienteCrudRepository.findById(cliente.getId())
+                .ifPresent(actual -> cliente.setPassword(actual.getPassword()));
+
         return mapper.toClient(clienteCrudRepository.save(cliente));
     }
 

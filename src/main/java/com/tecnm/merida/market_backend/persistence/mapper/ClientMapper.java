@@ -24,7 +24,11 @@ public interface ClientMapper {
 
     List<Client> toClients(List<Cliente> clientes);
 
+    // La contrasena nunca viaja en el dominio Client (no se expone en la API)
     @InheritInverseConfiguration
-    @Mapping(target = "compras", ignore = true)
+    @Mappings({
+            @Mapping(target = "compras", ignore = true),
+            @Mapping(target = "password", ignore = true)
+    })
     Cliente toCliente(Client client);
 }
